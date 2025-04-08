@@ -25,6 +25,7 @@ CREATE TABLE Cliente (
 	Endereco VARCHAR (255),
 	DataCadatro DATE
 );
+GO
 
 CREATE TABLE Pedido (
 	IdPedido INT PRIMARY KEY IDENTITY,
@@ -33,6 +34,7 @@ CREATE TABLE Pedido (
 	ValorTotal DECIMAL (18, 6),
 	IdCliente INT FOREIGN KEY REFERENCES Cliente(IdCliente)
 );
+GO
 
 CREATE TABLE Pagamento (
 	IdPagamento INT PRIMARY KEY IDENTITY,
@@ -41,6 +43,7 @@ CREATE TABLE Pagamento (
 	DataPagamento DATETIME,
 	IdPedido INT FOREIGN KEY REFERENCES Pedido(IdPedido)
 );
+GO
 
 CREATE TABLE Produto (
 	IdProduto INT PRIMARY KEY IDENTITY,
@@ -51,6 +54,7 @@ CREATE TABLE Produto (
 	Categoria VARCHAR (100),
 	Imagem VARCHAR (255)
 );
+GO
 
 CREATE TABLE ItemPedido (
 	IdItemPedido INT PRIMARY KEY IDENTITY,
@@ -58,6 +62,7 @@ CREATE TABLE ItemPedido (
 	IdPedido INT FOREIGN KEY REFERENCES Pedido(IdPedido),
 	IdProduto INT FOREIGN KEY REFERENCES Produto(IdProduto)
 );
+GO
 
 DROP TABLE ItemPedido;
 DROP TABLE Pagamento;
