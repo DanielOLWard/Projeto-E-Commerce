@@ -4,6 +4,7 @@ namespace E_Commerce_API.Interfaces
 {
     public interface IPedidoRepository
     {
+        // R - Read (leitura)
         List<Pedido> ListarTodos();
 
         Pedido BuscarPorId(int id);

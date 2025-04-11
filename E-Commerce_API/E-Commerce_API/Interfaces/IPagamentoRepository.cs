@@ -4,6 +4,7 @@ namespace E_Commerce_API.Interfaces
 {
     public interface IPagamentoRepository
     {
+        // R - Read (leitura)
         List<Pagamento> ListarTodos();
 
         Pagamento BuscarPorId(int id);

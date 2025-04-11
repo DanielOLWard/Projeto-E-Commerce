@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using E_Commerce_API.Context;
+﻿using E_Commerce_API.Context;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 
@@ -8,34 +7,31 @@ namespace E_Commerce_API.Repositories
     // 1 - Herdar a interface
     // 2 - Implementar a interface
     // 3 - Injetar o contexto
-    public class ProdutoRepository : IProdutoRepository
+    public class ItemPedidoRepository : IItemPedidoRepository
     {
-        // Metodos que acessam o BD
-
         // Injetar o Context
         // Injecao de Dependencia
-        private readonly EcommerceContext _context;
+        public readonly EcommerceContext _context;
 
         // ctor <Cria o metodo abaixo>
         // Metodo construtor
-        public ProdutoRepository(EcommerceContext context) 
+        public ItemPedidoRepository(EcommerceContext context)
         {
             _context = context;
         }
-
-        public void Atualizar(int id, Produto produto)
+        public void Atualizar(int id, ItemPedido itemPeido)
         {
             throw new NotImplementedException();
         }
 
-        public Produto BustarPorId(int id)
+        public ItemPedido BuscarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Cadastrar(Produto produto)
+        public void Cadastrar(ItemPedido itemPedido)
         {
-            _context.Produtos.Add(produto);
+            _context.ItemPedidos.Add(itemPedido);
         }
 
         public void Deletar(int id)
@@ -43,9 +39,9 @@ namespace E_Commerce_API.Repositories
             throw new NotImplementedException();
         }
 
-        public List<Produto> ListarTodos()
+        public List<ItemPedido> ListarTodos()
         {
-            return _context.Produtos.ToList();
+            return _context.ItemPedidos.ToList();
         }
     }
 }

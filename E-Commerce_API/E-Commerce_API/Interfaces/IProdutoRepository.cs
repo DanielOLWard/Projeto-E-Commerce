@@ -7,8 +7,7 @@ namespace E_Commerce_API.Interfaces
         // R - Read (leitura)
         List<Produto> ListarTodos();
 
-        //Recebe um identificador, e retorna o produto correspondente
-        Produto BustarPorId(int id);
+        Produto BustarPorId(int id); //Recebe um identificador, e retorna o produto correspondente
 
         // C - Create (Cadastrar)
         void Cadastrar(Produto produto);

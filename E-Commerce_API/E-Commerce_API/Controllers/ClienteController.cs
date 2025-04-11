@@ -8,22 +8,22 @@ namespace E_Commerce_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class ClienteController : ControllerBase
     {
         private readonly EcommerceContext _context;
-        private IProdutoRepository _produtoRepository;
+        private IClienteRepository _clineteRepository;
 
-        public ProdutoController(EcommerceContext context)
+        public ClienteController(EcommerceContext context)
         {
             _context = context;
-            _produtoRepository = new ProdutoRepository(_context);
+            _clineteRepository = new ClienteRepository(_context);
         }
 
         // GET 
         [HttpGet]
-        public IActionResult ListarProdutos()
+        public IActionResult ListarClientes()
         {
-            return Ok(_produtoRepository.ListarTodos());
+            return Ok(_clineteRepository.ListarTodos());
         }
     }
 }

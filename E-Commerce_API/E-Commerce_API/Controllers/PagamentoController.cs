@@ -3,27 +3,28 @@ using E_Commerce_API.Interfaces;
 using E_Commerce_API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProdutoController : ControllerBase
+    public class PagamentoController : ControllerBase
     {
         private readonly EcommerceContext _context;
-        private IProdutoRepository _produtoRepository;
+        private IPagamentoRepository _pagamentoRepository;
 
-        public ProdutoController(EcommerceContext context)
+        public PagamentoController(EcommerceContext context)
         {
             _context = context;
-            _produtoRepository = new ProdutoRepository(_context);
+            _pagamentoRepository = new PagamentoRepository(_context);
         }
 
         // GET 
         [HttpGet]
-        public IActionResult ListarProdutos()
+        public IActionResult ListarPagamentos()
         {
-            return Ok(_produtoRepository.ListarTodos());
+            return Ok(_pagamentoRepository.ListarTodos());
         }
     }
 }

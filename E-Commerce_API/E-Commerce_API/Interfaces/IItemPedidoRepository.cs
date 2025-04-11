@@ -2,8 +2,9 @@
 
 namespace E_Commerce_API.Interfaces
 {
-    public interface IIitemPedidoRepository
+    public interface IItemPedidoRepository
     {
+        // R - Read (leitura)
         List<ItemPedido> ListarTodos();
 
         ItemPedido BuscarPorId(int id);

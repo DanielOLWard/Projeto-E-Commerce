@@ -4,10 +4,17 @@ using E_Commerce_API.Models;
 
 namespace E_Commerce_API.Repositories
 {
+    // 1 - Herdar a interface
+    // 2 - Implementar a interface
+    // 3 - Injetar o contexto
     public class PedidoRepository : IPedidoRepository
     {
+        // Injetar o Context
+        // Injecao de Dependencia
         private readonly EcommerceContext _context;
 
+        // ctor <Cria o metodo abaixo>
+        // Metodo construtor
         public PedidoRepository(EcommerceContext context)
         {
             _context = context;
