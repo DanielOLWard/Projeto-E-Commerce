@@ -14,7 +14,7 @@ namespace E_Commerce_API.Repositories
         private readonly EcommerceContext _context;
 
         // ctor <Cria o metodo abaixo>
-        // Metodo construtor
+        // Metodo construtor - Metodo que tem o mesmo nome da classe
         public PagamentoRepository(EcommerceContext context)
         {
             _context = context;

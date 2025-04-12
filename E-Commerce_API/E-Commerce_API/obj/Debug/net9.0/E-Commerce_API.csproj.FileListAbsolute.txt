@@ -162,3 +162,8 @@ C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\bi
 C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\obj\Debug\net9.0\E-Commerce_API.csproj.AssemblyReference.cache
 C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\obj\Debug\net9.0\E-Commer.2711108C.Up2Date
 C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Fic\Documents\Daniel\Projeto Ecommerce\E-Commerce_API\E-Commerce_API\obj\Debug\net9.0\E-Commerce_API.MvcApplicationPartsAssemblyInfo.cs

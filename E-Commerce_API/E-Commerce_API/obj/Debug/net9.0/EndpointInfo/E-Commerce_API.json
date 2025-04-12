@@ -1,0 +1,291 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "E-Commerce_API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Cliente": {
+      "get": {
+        "tags": [
+          "Cliente"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ItemPedido": {
+      "get": {
+        "tags": [
+          "ItemPedido"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Pagamento": {
+      "get": {
+        "tags": [
+          "Pagamento"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Pedido": {
+      "get": {
+        "tags": [
+          "Pedido"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Produto": {
+      "get": {
+        "tags": [
+          "Produto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Produto"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Produto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "idCliente": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeCompleto": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataCadatro": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "pedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemPedido": {
+        "type": "object",
+        "properties": {
+          "idItemPedido": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidade": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idPedido": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idProduto": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idPedidoNavigation": {
+            "$ref": "#/components/schemas/Pedido"
+          },
+          "idProdutoNavigation": {
+            "$ref": "#/components/schemas/Produto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Pagamento": {
+        "type": "object",
+        "properties": {
+          "idPagamento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "formaPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "idPedido": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idPedidoNavigation": {
+            "$ref": "#/components/schemas/Pedido"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "idPedido": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataPedido": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "statusPedido": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorTotal": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "idCliente": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idClienteNavigation": {
+            "$ref": "#/components/schemas/Cliente"
+          },
+          "itemPedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemPedido"
+            },
+            "nullable": true
+          },
+          "pagamentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pagamento"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Produto": {
+        "type": "object",
+        "properties": {
+          "idProduto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomeProduto": {
+            "type": "string",
+            "nullable": true
+          },
+          "descricao": {
+            "type": "string",
+            "nullable": true
+          },
+          "preco": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "qtdEstoque": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categoria": {
+            "type": "string",
+            "nullable": true
+          },
+          "imagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemPedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemPedido"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

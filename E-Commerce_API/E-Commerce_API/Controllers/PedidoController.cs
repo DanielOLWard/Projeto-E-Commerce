@@ -19,7 +19,7 @@ namespace E_Commerce_API.Controllers
             _pedidoRepository = new PedidoRepository(_context);
         }
 
-        // GET 
+        // 1 - Definir o verbo <GET> 
         [HttpGet]
         public IActionResult ListarPedidos()
         {

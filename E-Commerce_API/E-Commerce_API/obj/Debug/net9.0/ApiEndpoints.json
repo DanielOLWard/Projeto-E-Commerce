@@ -48,5 +48,21 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce_API.Controllers.ProdutoController",
+    "Method": "CadastrarProduto",
+    "RelativePath": "api/Produto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "produto",
+        "Type": "E_Commerce_API.Models.Produto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

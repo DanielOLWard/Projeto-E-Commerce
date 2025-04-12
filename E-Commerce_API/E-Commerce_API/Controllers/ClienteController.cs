@@ -11,19 +11,19 @@ namespace E_Commerce_API.Controllers
     public class ClienteController : ControllerBase
     {
         private readonly EcommerceContext _context;
-        private IClienteRepository _clineteRepository;
+        private IClienteRepository _clienteRepository;
 
         public ClienteController(EcommerceContext context)
         {
             _context = context;
-            _clineteRepository = new ClienteRepository(_context);
+            _clienteRepository = new ClienteRepository(_context);
         }
 
-        // GET 
+        // 1 - Definir o verbo <GET> 
         [HttpGet]
         public IActionResult ListarClientes()
         {
-            return Ok(_clineteRepository.ListarTodos());
+            return Ok(_clienteRepository.ListarTodos());
         }
     }
 }

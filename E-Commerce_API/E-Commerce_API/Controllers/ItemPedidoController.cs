@@ -11,19 +11,19 @@ namespace E_Commerce_API.Controllers
     public class ItemPedidoController : ControllerBase
     {
         private readonly EcommerceContext _context;
-        private IItemPedidoRepository _itemPagamentoRepository;
+        private IItemPedidoRepository _itemPedidoRepository;
 
         public ItemPedidoController(EcommerceContext context)
         {
             _context = context;
-            _itemPagamentoRepository = new ItemPedidoRepository(_context);
+            _itemPedidoRepository = new ItemPedidoRepository(_context);
         }
 
-        // GET 
+        // 1 - Definir o verbo <GET> 
         [HttpGet]
         public IActionResult ListarItemPedidos()
         {
-            return Ok(_itemPagamentoRepository.ListarTodos());
+            return Ok(_itemPedidoRepository.ListarTodos());
         }
     }
 }
