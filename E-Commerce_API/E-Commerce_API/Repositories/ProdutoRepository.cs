@@ -36,6 +36,8 @@ namespace E_Commerce_API.Repositories
         public void Cadastrar(Produto produto)
         {
             _context.Produtos.Add(produto);
+
+            _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
 
         public void Deletar(int id)
