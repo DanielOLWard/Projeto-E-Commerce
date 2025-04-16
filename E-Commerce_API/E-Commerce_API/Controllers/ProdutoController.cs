@@ -16,7 +16,7 @@ namespace E_Commerce_API.Controllers
         // Metodo Construtor
         // Injecao de dependencia
         // Ao invez de EU instanciar a classe, Eu aviso que DEPENDO dela, e a responsabilidade de criar vai para a classe que chama
-        public ProdutoController (ProdutoRepository produtoRepository)
+        public ProdutoController (IProdutoRepository produtoRepository)
         {
         _produtoRepository = produtoRepository;
         }
@@ -40,6 +40,52 @@ namespace E_Commerce_API.Controllers
             // 2 - Retorne um resultado
             // 201 - Created <Criado>
             return Created();
+        }
+        // Buscar Produto por ID
+        [HttpGet("{id}")]
+        public IActionResult ListarPorId(int id)
+        {
+            Produto produto = _produtoRepository.BustarPorId(id);
+
+            if (produto == null)
+            {
+                //erro404 - nao encontrado
+                return NotFound(); // Retorna 404 se não encontrar o produto
+            }
+
+
+            return Ok(produto); // Retorna 200 com os dados do produto
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Editar(int id, Produto prod)
+        {
+            try
+            {
+                _produtoRepository.Atualizar(id, prod);
+
+                return Ok(prod);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Produto nao encontrado!");
+            }
+        }
+
+        // Deleta Produto por ID
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            try
+            {
+                _produtoRepository.Deletar(id);
+                return NoContent();
+            }
+
+            catch (Exception ex)
+            {
+                return NotFound("Produto nao encontrado!");
+            }
         }
     }
 }

@@ -25,12 +25,30 @@ namespace E_Commerce_API.Repositories
 
         public void Atualizar(int id, Produto produto)
         {
-            throw new NotImplementedException();
+            // Encontro o produto que desejo
+            Produto produtoEncontrado = _context.Produtos.Find(id);
+
+            // Tratamento de erro
+            if (produtoEncontrado == null)
+            {
+                throw new Exception();
+            }
+
+            // Muda os dados um por um
+            produtoEncontrado.NomeProduto = produto.NomeProduto;
+            produtoEncontrado.Descricao = produto.Descricao;
+            produtoEncontrado.Preco = produto.Preco;
+            produtoEncontrado.Categoria = produto.Categoria;
+            produtoEncontrado.Imagem = produto.Imagem;
+            produtoEncontrado.QtdEstoque = produto.QtdEstoque;
+
+            _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
 
         public Produto BustarPorId(int id)
         {
-            throw new NotImplementedException();
+            // FirstorDefault - Traz o primeiro que encontrar ou null <nada> (melhor para filtrar)
+            return _context.Produtos.FirstOrDefault(p => p.IdProduto == id); // Acessa a tabela, pega o primeiro que encontrar, me retorne aquele que tem o IdProduto igual ao id
         }
 
         public void Cadastrar(Produto produto)
@@ -42,11 +60,25 @@ namespace E_Commerce_API.Repositories
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            // 1 - encontrar o que eu quero excluir
+            Produto produtoEncontrado = _context.Produtos.Find(id); // Find - Procura apenas pela chave primaria
+
+            // Tratamento de erro
+            if (produtoEncontrado == null)
+            {
+                throw new Exception();
+            }
+
+            // 2 - Caso eu enconte o produto, removo ele
+            _context.Produtos.Remove(produtoEncontrado);
+
+            // 3 - Salvo as alteracoes
+            _context.SaveChanges();
         }
 
         public List<Produto> ListarTodos()
         {
+            // ToList() - Lista varios
             return _context.Produtos.ToList();
         }
     }
