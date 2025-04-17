@@ -45,7 +45,7 @@ namespace E_Commerce_API.Controllers
         [HttpGet("{id}")]
         public IActionResult ListarPorId(int id)
         {
-            Produto produto = _produtoRepository.BustarPorId(id);
+            Produto produto = _produtoRepository.BuscarPorId(id);
 
             if (produto == null)
             {
@@ -56,10 +56,11 @@ namespace E_Commerce_API.Controllers
 
             return Ok(produto); // Retorna 200 com os dados do produto
         }
-
+        // Atualizar o Produto por ID
         [HttpPut("{id}")]
-        public IActionResult Editar(int id, Produto prod)
+        public IActionResult AtualizarProduto(int id, Produto prod)
         {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
             try
             {
                 _produtoRepository.Atualizar(id, prod);
@@ -71,11 +72,11 @@ namespace E_Commerce_API.Controllers
                 return NotFound("Produto nao encontrado!");
             }
         }
-
         // Deleta Produto por ID
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
             try
             {
                 _produtoRepository.Deletar(id);

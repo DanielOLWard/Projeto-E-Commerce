@@ -40,5 +40,51 @@ namespace E_Commerce_API.Controllers
             // 201 - Created <Criado>
             return Created();
         }
+        // Buscar Produto por ID
+        [HttpGet("{id}")]
+        public IActionResult ListarPorId(int id)
+        {
+            Cliente cliente = _clienteRepository.BuscarPorId(id);
+
+            if (cliente == null)
+            {
+                //erro404 - nao encontrado
+                return NotFound(); // Retorna 404 se não encontrar o cliente
+            }
+
+
+            return Ok(cliente); // Retorna 200 com os dados do cliente
+        }
+        // Atualizar o Cliente por ID
+        [HttpPut("{id}")]
+        public IActionResult AtualizarCliente(int id, Cliente clie)
+        {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
+            try
+            {
+                _clienteRepository.Atualizar(id, clie);
+
+                return Ok(clie);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Cliente nao encontrado!");
+            }
+        }
+        // Deleta Cliente por ID
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
+            try
+            {
+                _clienteRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Cliente nao encontrado!");
+            }
+        }
     }
 }

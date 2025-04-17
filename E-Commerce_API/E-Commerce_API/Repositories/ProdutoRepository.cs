@@ -45,7 +45,7 @@ namespace E_Commerce_API.Repositories
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
 
-        public Produto BustarPorId(int id)
+        public Produto BuscarPorId(int id)
         {
             // FirstorDefault - Traz o primeiro que encontrar ou null <nada> (melhor para filtrar)
             return _context.Produtos.FirstOrDefault(p => p.IdProduto == id); // Acessa a tabela, pega o primeiro que encontrar, me retorne aquele que tem o IdProduto igual ao id
