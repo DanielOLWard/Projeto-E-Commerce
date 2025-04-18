@@ -22,7 +22,7 @@ namespace E_Commerce_API.Repositories
         }
         public void Atualizar(int id, Cliente cliente)
         {
-            // Encontro o cliente que desejo
+            // Encontro o cliente que desejo atualizar
             Cliente clienteEncontrado = _context.Clientes.Find(id);
 
             // Tratamento de erro
@@ -35,6 +35,7 @@ namespace E_Commerce_API.Repositories
             clienteEncontrado.NomeCompleto = cliente.NomeCompleto;
             clienteEncontrado.Telefone = cliente.Telefone;
             clienteEncontrado.Email = cliente.Email;
+            clienteEncontrado.Senha = cliente.Senha;
             clienteEncontrado.Endereco = cliente.Endereco;
             clienteEncontrado.DataCadatro = cliente.DataCadatro;
 

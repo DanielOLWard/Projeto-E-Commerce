@@ -41,5 +41,49 @@ namespace E_Commerce_API.Controllers
             // 201 - Created <Criado>
             return Created();
         }
+        // Buscar Pagamento por ID
+        [HttpGet("{id}")]
+        public IActionResult ListarPorId(int id)
+        {
+            Pagamento pagamento = _pagamentoRepository.BuscarPorId(id);
+            if (pagamento == null)
+            {
+                //erro404 - nao encontrado
+                return NotFound(); // Retorna 404 se não encontrar o pagamento
+            }
+
+            return Ok(pagamento); // Retorna 200 com os dados do produto
+        }
+        // Atualizar o Pagamento por ID
+        [HttpPut("{id}")]
+        public IActionResult AtualizarPagamento(int id, Pagamento pag)
+        {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
+            try
+            {
+                _pagamentoRepository.Atualizar(id, pag);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Pagamento nao econtrado!");
+            }
+        }
+        // Deleta Pagamento por ID
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
+            try
+            {
+                _pagamentoRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Pagamento nao encontrado!");
+            }
+        }
     }
 }

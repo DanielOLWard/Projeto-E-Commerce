@@ -25,7 +25,7 @@ namespace E_Commerce_API.Repositories
 
         public void Atualizar(int id, Produto produto)
         {
-            // Encontro o produto que desejo
+            // Encontro o produto que desejo atualizar
             Produto produtoEncontrado = _context.Produtos.Find(id);
 
             // Tratamento de erro

@@ -7,15 +7,15 @@ public partial class Produto
 {
     public int IdProduto { get; set; }
 
-    public string? NomeProduto { get; set; }
+    public string NomeProduto { get; set; } = null!;
 
     public string? Descricao { get; set; }
 
-    public decimal? Preco { get; set; }
+    public decimal Preco { get; set; }
 
-    public int? QtdEstoque { get; set; }
+    public int QtdEstoque { get; set; }
 
-    public string? Categoria { get; set; }
+    public string Categoria { get; set; } = null!;
 
     public string? Imagem { get; set; }
 

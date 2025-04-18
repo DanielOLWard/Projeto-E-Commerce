@@ -6,10 +6,10 @@ VALUES
 ('Mouse', 'Mouse Logitech', 99.90, 50, 'Informatica', ''),
 ('Teclado', 'Teclado Dell', 209.50, 100, 'Informatica', '')
 
-INSERT INTO Cliente (NomeCompleto, EMail, Telefone, Endereco, DataCadatro)
+INSERT INTO Cliente (NomeCompleto, EMail, Senha,  Telefone, Endereco, DataCadatro)
 VALUES
-('Daniel Oliveira', 'daniel@gmail.com', '(11)912341234', 'Estrada ficticia, 356 - Sao Paulo/SP', '05/04/2025'),
-('Fulano Teste', 'fulano@gmail.com', '(11)943214321', 'Estrada ficticia, 457358 - Sao Paulo/SP', '21/09/2025');
+('Daniel Oliveira', 'daniel@gmail.com', '123456', '(11)912341234', 'Estrada ficticia, 356 - Sao Paulo/SP', '05/04/2025'),
+('Fulano Teste', 'fulano@gmail.com', '123456', '(11)943214321', 'Estrada ficticia, 457358 - Sao Paulo/SP', '21/09/2025');
 
 INSERT INTO Pedido ( IdCliente, DataPedido, StatusPedido, ValorTotal)
 VALUES
@@ -18,13 +18,13 @@ VALUES
 
 INSERT INTO Pagamento (IdPedido, FormaPagamento, StatusPagamento, DataPagamento)
 VALUES
-(3, 'PIX', 'Estornado', '07/02/1999 07:59:59'),
-(4, 'Dinheiro', 'Concluido', '29/04/2009 08:36:55')
+(1, 'PIX', 'Estornado', '07/02/1999 07:59:59'),
+(2, 'Dinheiro', 'Concluido', '29/04/2009 08:36:55')
 
 INSERT INTO ItemPedido(IdPedido, IdProduto, Quantidade)
 VALUES
-(3, 1, 5),
-(4, 2, 6)
+(1, 1, 5),
+(2, 2, 6)
 
 -- NAO USAR SEM O "WHERE"
 DELETE FROM Cliente WHERE NomeCompleto = 'Fulano Teste';

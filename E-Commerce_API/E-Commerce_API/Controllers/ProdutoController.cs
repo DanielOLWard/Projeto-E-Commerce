@@ -53,7 +53,6 @@ namespace E_Commerce_API.Controllers
                 return NotFound(); // Retorna 404 se não encontrar o produto
             }
 
-
             return Ok(produto); // Retorna 200 com os dados do produto
         }
         // Atualizar o Produto por ID
@@ -82,7 +81,6 @@ namespace E_Commerce_API.Controllers
                 _produtoRepository.Deletar(id);
                 return NoContent();
             }
-
             catch (Exception ex)
             {
                 return NotFound("Produto nao encontrado!");

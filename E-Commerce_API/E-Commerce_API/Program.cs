@@ -2,8 +2,8 @@
 
 // 1 - Instalar os pacotes do Entity Framework <Microsoft.EntityFrameworkCore.Tools> <Microsoft.EntityFrameworkCore.Tools> <Microsoft.EntityFrameworkCore.Tools>
 
-// 2 - Realizar o Scaffold, colocar esses codigos no terminal da solucao: dotnet tool install --global dotnet-ef
-// dotnet ef dbcontext scaffold "Data Source=.\\SQLEXPRESS;Initial Catalog=ECommerce;User Id=sa;Password=Senai@134;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Context --output-dir Models
+// 2 - Realizar o Scaffold, colocar esse codigo no terminal da solucao:
+// dotnet ef dbcontext scaffold "Data Source=NOTE04-S28\SQLEXPRESS;Initial Catalog=ECommerce;User Id=sa;Password=Senai@134;TrustServerCertificate=true;" Microsoft.EntityFrameworkCore.SqlServer --context-dir Context --output-dir Models
 
 // 3 - Criar as pastas <Interfaces> <Repositories> <Controllers>
 
@@ -31,7 +31,7 @@ using E_Commerce_API.Controllers;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Repositories;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args); // Nao mexer e sempre deixar ela no comeco (com excessao dos "using")
 
 builder.Services.AddControllers();
 
@@ -45,14 +45,16 @@ builder.Services.AddSwaggerGen();
 
 // AddSingleton 
 
-builder.Services.AddScoped<EcommerceContext, EcommerceContext>();
+// AddDbContext - Mesma coisa do Scoped,mas especifico para o Contexto
+
+builder.Services.AddDbContext<EcommerceContext>();
 builder.Services.AddTransient<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddTransient<IClienteRepository, ClienteRepository>();
 builder.Services.AddTransient<IPagamentoRepository, PagamentoRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddTransient<IItemPedidoRepository, ItemPedidoRepository>();
 
-var app = builder.Build();
+var app = builder.Build(); // O C# controi o "site" NAO MEXER, Colocar os codigos entre ele e o "var builder"
 
 app.UseSwagger();
 
@@ -60,4 +62,4 @@ app.UseSwaggerUI();
 
 app.MapControllers();
 
-app.Run();
+app.Run(); // sempre sera a ultima linha de codigo, pois codigos depois dela nao ira funcionar

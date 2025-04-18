@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "72dcc31a-aa4f-4ca1-8ce3-8dc8f9b206cf",
+		"name": "Projeto ECommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44167006",
+		"_collection_link": "https://danieloliveira-6401007.postman.co/workspace/Daniel-Oliveira's-Workspace~ccd86c85-c681-4d42-8b28-55399b44d1ba/collection/44167006-72dcc31a-aa4f-4ca1-8ce3-8dc8f9b206cf?action=share&source=collection_link&creator=44167006"
+	},
+	"item": [
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "Listar Todos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/produto",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/produto/11",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"produto",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeProduto\": \"Teclado\",\r\n        \"descricao\": \"Teclado Dell\",\r\n        \"preco\": 209.500000,\r\n        \"qtdEstoque\": 100,\r\n        \"categoria\": \"Informatica\",\r\n        \"imagem\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/produto",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeProduto\": \"Fone\",\r\n        \"descricao\": \"Fone Bluetooth\",\r\n        \"preco\": 149.990000,\r\n        \"qtdEstoque\": 100,\r\n        \"categoria\": \"Eletronicos\",\r\n        \"imagem\": \"\",\r\n        \"itemPedidos\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/produto/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"produto",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/produto/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"produto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Listar Todos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Content-Type header is application/json\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response schema is as expected\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(responseData).to.be.an('array').that.is.not.empty;\r",
+									"    responseData.forEach(function(cliente) {\r",
+									"        pm.expect(cliente).to.have.property('idCliente').that.is.a('number');\r",
+									"        pm.expect(cliente).to.have.property('nomeCompleto').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('email').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('senha').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('telefone').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('endereco').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('dataCadatro').that.is.a('string');\r",
+									"        pm.expect(cliente).to.have.property('pedidos').that.is.an('array');\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"IdCliente is a non-negative integer\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.idCliente).to.be.a('number').and.to.be.at.least(0);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"NomeCompleto is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.nomeCompleto).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Email is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.email).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Telefone is in a valid format\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.telefone).to.match(/^\\d{10,11}$/);\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Endereco is a non-empty string\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.endereco).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");\r",
+									"    });\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Pedidos is an array\", function () {\r",
+									"    const responseData = pm.response.json();\r",
+									"    responseData.forEach(function(item) {\r",
+									"        pm.expect(item.pedidos).to.be.an('array');\r",
+									"    });\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/cliente",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/cliente/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nomeCompleto\": \"Daniel\",\r\n        \"email\": \"sla@gmail.com\",\r\n        \"telefone\": \"(11)912341234\",\r\n        \"endereco\": \"Estrada, 585 - Sao Paulo/SP\",\r\n        \"dataCadatro\": \"2025-04-17\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/cliente",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeCompleto\": \"Daniel teste\",\r\n    \"email\": \"teste@gmail.com\",\r\n    \"telefone\": \"55555555\",\r\n    \"endereco\": \"Rua, 585 - Sao Paulo/SP\",\r\n    \"dataCadatro\": \"2020-04-17\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/cliente/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/cliente/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamento",
+			"item": [
+				{
+					"name": "Listar Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/pagamento",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"pagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/pagamento/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"pagamento",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"formaPagamento\": \"DINHEIRO\",\r\n    \"statusPagamento\": \"Concluido\",\r\n    \"dataPagamento\": \"1999-02-07T07:59:59\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/pagamento",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"pagamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"formaPagamento\": \"cartao\",\r\n        \"statusPagamento\": \"Concluido\",\r\n        \"dataPagamento\": \"1999-02-07T07:59:59\",\r\n        \"idPedido\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/pagamento/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"pagamento",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/pagamento/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"pagamento",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
