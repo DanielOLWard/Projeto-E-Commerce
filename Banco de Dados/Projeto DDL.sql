@@ -42,7 +42,7 @@ CREATE TABLE Pagamento (
 	FormaPagamento VARCHAR (30) NOT NULL,
 	StatusPagamento VARCHAR (20) NOT NULL,
 	DataPagamento DATETIME NOT NULL,
-	IdPedido INT FOREIGN KEY REFERENCES Pedido(IdPedido) NOT NULL
+	IdPedido INT FOREIGN KEY REFERENCES Pedido(IdPedido)
 );
 GO
 

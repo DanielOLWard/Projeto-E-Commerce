@@ -1,4 +1,4 @@
-// Passo a passo da API
+/* Passo a passo da API
 
 // 1 - Instalar os pacotes do Entity Framework <Microsoft.EntityFrameworkCore.Tools> <Microsoft.EntityFrameworkCore.Tools> <Microsoft.EntityFrameworkCore.Tools>
 
@@ -13,18 +13,15 @@
 
 // 6 - Criar o Controller, de cada model
 
-// 7 - Configurar a Program.cs 
-///
+ 7 - Configurar a Program.cs */
 
-// Instalando o Swagger
+/* Instalando o Swagger
 
 // 1 - Instalar os pacotes do Swaggwers <Swashbuckle.AspNetCore.SwaggerGen> <Swashbuckle.AspNetCore.SwaggerUI>
 
 // 2 - Colocar os comandos do Swaggers na Program <builder.Services.AddSwaggerGen();> <app.UseSwagger();> <app.UseSwaggerUI();>
 
-// Se ultiliza o Swaggers no http usando o sSwagger na URL
-///
-
+// Se ultiliza o Swaggers no http usando o sSwagger na URL */
 
 using E_Commerce_API.Context;
 using E_Commerce_API.Controllers;

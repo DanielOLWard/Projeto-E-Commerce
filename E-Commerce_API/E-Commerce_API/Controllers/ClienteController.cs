@@ -86,5 +86,16 @@ namespace E_Commerce_API.Controllers
                 return NotFound("Cliente nao encontrado!");
             }
         }
+
+        // Buscar Cliente por Email e Senha
+        // /api/cliente/daniel@gmail.com/12345
+        [HttpGet("{email}/{senha}")]
+        public IActionResult Login(string email, string senha)
+        {
+            var cliente = _clienteRepository.BuscarPorEmailSenha(email, senha);
+            if (cliente == null)
+            { return NotFound(); }
+            return Ok(cliente);
+        }
     }
 }

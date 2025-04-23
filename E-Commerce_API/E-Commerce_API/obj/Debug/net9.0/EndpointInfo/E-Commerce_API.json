@@ -598,13 +598,6 @@
               "$ref": "#/components/schemas/ItemPedido"
             },
             "nullable": true
-          },
-          "pagamentos": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Pagamento"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

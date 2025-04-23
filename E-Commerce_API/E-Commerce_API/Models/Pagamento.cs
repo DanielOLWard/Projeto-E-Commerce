@@ -15,5 +15,10 @@ public partial class Pagamento
 
     public int? IdPedido { get; set; }
 
+    // Esta com o nome IdPedidoNavigation pois nao foi criado no padrao do Entity
+    // Padrao Entity <nome da Tabela>Id
+    // Como esta na tebela Id <nome da tabela>
+    // Para alterar o nome precisa alterar ele no contexto tbm
+    // Nao alterei para o comentario nao ficar "solto"
     public virtual Pedido? IdPedidoNavigation { get; set; }
 }
