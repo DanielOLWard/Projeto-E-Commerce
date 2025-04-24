@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 
@@ -23,7 +24,7 @@ namespace E_Commerce_API.Repositories
             _context = context;
         }
 
-        public void Atualizar(int id, Produto produto)
+        public void Atualizar(int id, CadastrarProdutoDTO produto)
         {
             // Encontro o produto que desejo atualizar
             Produto produtoEncontrado = _context.Produtos.Find(id);
@@ -51,9 +52,18 @@ namespace E_Commerce_API.Repositories
             return _context.Produtos.FirstOrDefault(p => p.IdProduto == id); // Acessa a tabela, pega o primeiro que encontrar, me retorne aquele que tem o IdProduto igual ao id
         }
 
-        public void Cadastrar(Produto produto)
+        public void Cadastrar(CadastrarProdutoDTO dto)
         {
-            _context.Produtos.Add(produto);
+            Produto produtoCadastro = new Produto
+            {
+                NomeProduto = dto.NomeProduto,
+                Descricao = dto.Descricao,
+                Preco = dto.Preco,
+                QtdEstoque = dto.QtdEstoque,
+                Categoria = dto.Categoria,
+                Imagem = dto.Imagem,
+            };
+            _context.Produtos.Add(produtoCadastro);
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }

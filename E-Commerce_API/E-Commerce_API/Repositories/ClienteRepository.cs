@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 
@@ -20,7 +21,7 @@ namespace E_Commerce_API.Repositories
         {
             _context = context;
         }
-        public void Atualizar(int id, Cliente clienteNovo)
+        public void Atualizar(int id, CadastrarClienteDTO clienteNovo)
         {
             // Encontro o cliente que desejo atualizar
             Cliente clienteEncontrado = _context.Clientes.Find(id);
@@ -60,9 +61,18 @@ namespace E_Commerce_API.Repositories
             return _context.Clientes.FirstOrDefault(c => c.IdCliente == id); // Acessa a tabela, pega o primeiro que encontrar, me retorne aquele que tem o IdCliente igual ao id
         }
 
-        public void Cadastrar(Cliente cliente)
+        public void Cadastrar(CadastrarClienteDTO dto)
         {
-            _context.Clientes.Add(cliente);
+            Cliente clienteCdastrado = new Cliente
+            {
+                NomeCompleto = dto.NomeCompleto,
+                Email = dto.Email,
+                Senha = dto.Senha,
+                Telefone = dto.Telefone,
+                Endereco = dto.Endereco,
+                DataCadatro = dto.DataCadatro,
+            };
+            _context.Clientes.Add(clienteCdastrado);
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
@@ -88,7 +98,18 @@ namespace E_Commerce_API.Repositories
         public List<Cliente> ListarTodos()
         {
             // ToList() - Lista varios
-            return _context.Clientes.ToList();
+            return _context.Clientes
+                .OrderBy(c => c.NomeCompleto) // OrderBy - ordena por ordem crescente, OrderByDescending - ordena por ordem decrescente
+                .ToList();
+        }
+
+        public List<Cliente> BuscarPorNome(string nome)
+        {
+            // Where - Traz todos que atendem uma condicao
+            // O Where tem uma construcao bem similar ao FirstOrDefault
+            var listaCliente = _context.Clientes.Where(c => c.NomeCompleto == nome).ToList(); // Sempre usar o ToList quando trazer mais de uma informacao
+
+            return listaCliente;
         }
     }
 }

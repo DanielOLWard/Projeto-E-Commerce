@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
@@ -32,7 +33,7 @@ namespace E_Commerce_API.Controllers
         // Cadastrar Pagamento
         // Post - Cadastrar uma ou mais informacoes para o front 
         [HttpPost]
-        public IActionResult CadastrarPagamento(Pagamento pagamento)
+        public IActionResult CadastrarPagamento(CadastrarPagamentosDTO pagamento)
         {
             // 1 - Coloco o Pagamento no banco de dados
             _pagamentoRepository.Cadastrar(pagamento);
@@ -56,7 +57,7 @@ namespace E_Commerce_API.Controllers
         }
         // Atualizar o Pagamento por ID
         [HttpPut("{id}")]
-        public IActionResult AtualizarPagamento(int id, Pagamento pag)
+        public IActionResult AtualizarPagamento(int id, CadastrarPagamentosDTO pag)
         {
             // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
             try

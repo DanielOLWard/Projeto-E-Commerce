@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
@@ -31,7 +32,7 @@ namespace E_Commerce_API.Controllers
         // Cadastrar Cliente
         // Post - Cliente uma ou mais informacoes para o front 
         [HttpPost]
-        public IActionResult CadastrarCliente(Cliente cliente)
+        public IActionResult CadastrarCliente(CadastrarClienteDTO cliente)
         {
             // 1 - Coloco o Cliente no banco de dados
             _clienteRepository.Cadastrar(cliente);
@@ -40,7 +41,7 @@ namespace E_Commerce_API.Controllers
             // 201 - Created <Criado>
             return Created();
         }
-        // Buscar Produto por ID
+        // Buscar Cliente por ID
         [HttpGet("{id}")]
         public IActionResult ListarPorId(int id)
         {
@@ -57,7 +58,7 @@ namespace E_Commerce_API.Controllers
         }
         // Atualizar o Cliente por ID
         [HttpPut("{id}")]
-        public IActionResult AtualizarCliente(int id, Cliente clie)
+        public IActionResult AtualizarCliente(int id, CadastrarClienteDTO clie)
         {
             // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
             try
@@ -96,6 +97,14 @@ namespace E_Commerce_API.Controllers
             if (cliente == null)
             { return NotFound(); }
             return Ok(cliente);
+        }
+        // Buscar Cliente por Nome
+        // /api/cliente/buscar/nome
+        // O navegador nao entende quando tem 2 endpoints "enguais" ai e necessario criar um novo endpoint
+        [HttpGet("/buscar/{nome}")]
+        public IActionResult BuscarPorNome(string nome)
+        {
+            return Ok(_clienteRepository.BuscarPorNome(nome));
         }
     }
 }

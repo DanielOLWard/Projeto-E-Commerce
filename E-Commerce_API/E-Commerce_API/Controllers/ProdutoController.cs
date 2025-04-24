@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
@@ -32,7 +33,7 @@ namespace E_Commerce_API.Controllers
         // Cadastrar Produto
         // Post - Cadastrar uma ou mais informacoes para o front 
         [HttpPost]
-        public IActionResult CadastrarProduto(Produto produto)
+        public IActionResult CadastrarProduto(CadastrarProdutoDTO produto)
         {
             // 1 - Coloco o Produto no banco de dados
             _produtoRepository.Cadastrar(produto);
@@ -57,7 +58,7 @@ namespace E_Commerce_API.Controllers
         }
         // Atualizar o Produto por ID
         [HttpPut("{id}")]
-        public IActionResult AtualizarProduto(int id, Produto prod)
+        public IActionResult AtualizarProduto(int id, CadastrarProdutoDTO prod)
         {
             // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
             try

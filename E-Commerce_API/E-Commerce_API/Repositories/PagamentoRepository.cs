@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace E_Commerce_API.Repositories
         {
             _context = context;
         }
-        public void Atualizar(int id, Pagamento pagamento)
+        public void Atualizar(int id, CadastrarPagamentosDTO pagamento)
         {
             // Encontro o pagamento que desejo atualizar
             Pagamento pagamentoEncontrado = _context.Pagamentos.Find(id);
@@ -45,9 +46,15 @@ namespace E_Commerce_API.Repositories
             return _context.Pagamentos.FirstOrDefault(p => p.IdPagamento == id);// Acessa a tabela, pega o primeiro que encontrar, me retorne aquele que tem o IdProduto igual ao id
         }
 
-        public void Cadastrar(Pagamento pagamento)
+        public void Cadastrar(CadastrarPagamentosDTO dto)
         {
-            _context.Pagamentos.Add(pagamento);
+            Pagamento pagamentoCadastrado = new Pagamento
+            {
+                FormaPagamento = dto.FormaPagamento,
+                StatusPagamento = dto.StatusPagamento,
+                DataPagamento = dto.DataPagamento,
+            };
+            _context.Pagamentos.Add(pagamentoCadastrado);
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }

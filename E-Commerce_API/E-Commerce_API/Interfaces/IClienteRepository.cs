@@ -1,4 +1,5 @@
-﻿using E_Commerce_API.Models;
+﻿using E_Commerce_API.DTO;
+using E_Commerce_API.Models;
 
 namespace E_Commerce_API.Interfaces
 {
@@ -12,14 +13,16 @@ namespace E_Commerce_API.Interfaces
         Cliente BuscarPorEmailSenha(string email, string senha);
 
         // C - Create (Cadastrar)
-        void Cadastrar(Cliente cliente);
+        void Cadastrar(CadastrarClienteDTO cliente);
 
         // U - Update (Atualizacao)
         // Recbe um identificador, e recebe um produto novo para ficar no lugar do antigo
-        void Atualizar (int id, Cliente cliente);
+        void Atualizar (int id, CadastrarClienteDTO cliente);
 
         // D - Delete (Delecao)
         // Recebo o identificador de quem quero excluir
         void Deletar(int id);
+
+        List<Cliente> BuscarPorNome(string nome);
     }
 }
