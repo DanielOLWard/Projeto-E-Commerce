@@ -377,6 +377,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Buscar por email e senha",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/cliente/fulano@gmail.com/123456",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"cliente",
+								"fulano@gmail.com",
+								"123456"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar por Nome",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/buscar/Daniel Oliveira",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"buscar",
+								"Daniel Oliveira"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
