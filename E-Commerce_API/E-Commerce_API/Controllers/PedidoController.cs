@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
@@ -31,7 +32,7 @@ namespace E_Commerce_API.Controllers
         // Cadastrar Pedido
         // Post - Cadastrar uma ou mais informacoes para o front 
         [HttpPost]
-        public IActionResult CadastrarPedido(Pedido pedido)
+        public IActionResult CadastrarPedido(CadastrarPedidoDTO pedido)
         {
             // 1 - Coloco o Pedido no banco de dados
             _pedidoRepository.Cadastrar(pedido);

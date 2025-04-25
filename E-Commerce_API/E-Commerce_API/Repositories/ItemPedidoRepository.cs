@@ -13,7 +13,7 @@ namespace E_Commerce_API.Repositories
         // Injecao de Dependencia
         public readonly EcommerceContext _context;
 
-        // ctor <Cria o metodo abaixo>
+        // ctor <Atalho para criar o metodo abaixo>
         // Metodo construtor - Metodo que tem o mesmo nome da classe
         public ItemPedidoRepository(EcommerceContext context)
         {

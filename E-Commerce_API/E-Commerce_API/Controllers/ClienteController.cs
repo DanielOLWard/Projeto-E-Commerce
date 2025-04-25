@@ -3,6 +3,7 @@ using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
+using E_Commerce_API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,7 +46,7 @@ namespace E_Commerce_API.Controllers
         [HttpGet("{id}")]
         public IActionResult ListarPorId(int id)
         {
-            Cliente cliente = _clienteRepository.BuscarPorId(id);
+            ListarClienteViewModel cliente = _clienteRepository.BuscarPorId(id);
 
             if (cliente == null)
             {
@@ -100,11 +101,18 @@ namespace E_Commerce_API.Controllers
         }
         // Buscar Cliente por Nome
         // /api/cliente/buscar/nome
-        // O navegador nao entende quando tem 2 endpoints "enguais" ai e necessario criar um novo endpoint
+        // O navegador nao entende quando tem 2 endpoints "enguais" entao e necessario criar um novo endpoint
         [HttpGet("/buscar/{nome}")]
         public IActionResult BuscarPorNome(string nome)
         {
             return Ok(_clienteRepository.BuscarPorNome(nome));
+        }
+
+        // Ordernar por Ordem Alfabetica
+        [HttpGet("/ordernar/{nome}")]
+        public IActionResult OrdenarAlfabeticamente(string nome)
+        {
+            return Ok(_clienteRepository.OrdenarAlfabeticamente(nome));
         }
     }
 }

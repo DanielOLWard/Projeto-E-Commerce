@@ -1,4 +1,5 @@
 ﻿using E_Commerce_API.Context;
+using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 
@@ -13,15 +14,30 @@ namespace E_Commerce_API.Repositories
         // Injecao de Dependencia
         private readonly EcommerceContext _context;
 
-        // ctor <Cria o metodo abaixo>
+        // ctor <Atalho para criar o metodo abaixo>
         // Metodo construtor - Metodo que tem o mesmo nome da classe
         public PedidoRepository(EcommerceContext context)
         {
             _context = context;
         }
-        public void Atualizar(int id, Pedido pedido)
+        public void Atualizar(int id, CadastrarPedidoDTO pedido)
         {
-            throw new NotImplementedException();
+            // Encontro o pedido que desejo atualizar
+            Pedido pedidoEncontrado = _context.Pedidos.Find(id);
+
+            // Tratamento de erro
+            if (pedidoEncontrado == null)
+            {
+                throw new Exception();
+            }
+
+            // Muda os dados um por um
+            pedidoEncontrado.DataPedido = pedidoEncontrado.DataPedido;
+            pedidoEncontrado.StatusPedido = pedidoEncontrado.StatusPedido;
+            pedidoEncontrado.ValorTotal = pedidoEncontrado.ValorTotal;
+            pedidoEncontrado.IdCliente = pedidoEncontrado.IdCliente;
+
+            _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
 
         public Pedido BuscarPorId(int id)
@@ -29,11 +45,40 @@ namespace E_Commerce_API.Repositories
             throw new NotImplementedException();
         }
 
-        public void Cadastrar(Pedido pedido)
+        // Cadastrar Pedido
+        public void Cadastrar(CadastrarPedidoDTO pedidoDTO)
         {
-            _context.Pedidos.Add(pedido);
+            // Crio a variavel pedido para guardar as informacoes do Peiddo
+            var pedido = new Pedido
+            {
+                DataPedido = pedidoDTO.DataPedido,
+                StatusPedido = pedidoDTO.StatusPedido,
+                IdCliente = pedidoDTO.IdCliente,
+                ValorTotal = pedidoDTO.ValorTotal
+            };
+
+            _context.Pedidos.Add(pedido); // Salva o Pedido no Banco de Dados
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
+
+            // Cadastrar os ItensPedido
+            // para cada Produto, eu Crio um ItemPedido
+            for (int i = 0; i < pedidoDTO.Produtos.Count; i++)
+            {
+                var produto = _context.Produtos.Find(pedidoDTO.Produtos[i]); // Procuro o Produto atual
+                // TODO: Lancar erro se produto nao existe
+
+                // Crio uma variavel para guardar as informacoes do ItemPedido
+                var itemPedido = new ItemPedido
+                {
+                    IdPedido = pedido.IdPedido,
+                    IdProduto = produto.IdProduto,
+                    Quantidade = 0
+                };
+                _context.ItemPedidos.Add(itemPedido); // Salva o ItemPedido no Banco de Dados
+
+                _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
+            }
         }
 
         public void Deletar(int id)

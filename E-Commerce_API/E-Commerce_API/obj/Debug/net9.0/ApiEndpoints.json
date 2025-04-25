@@ -224,7 +224,7 @@
     "Parameters": [
       {
         "Name": "pedido",
-        "Type": "E_Commerce_API.Models.Pedido",
+        "Type": "E_Commerce_API.DTO.CadastrarPedidoDTO",
         "IsRequired": true
       }
     ],
@@ -313,6 +313,22 @@
     "ContainingType": "E_Commerce_API.Controllers.ClienteController",
     "Method": "BuscarPorNome",
     "RelativePath": "buscar/{nome}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "nome",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce_API.Controllers.ClienteController",
+    "Method": "OrdenarAlfabeticamente",
+    "RelativePath": "ordernar/{nome}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
