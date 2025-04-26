@@ -231,6 +231,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "E_Commerce_API.Controllers.PedidoController",
+    "Method": "AtualizarPedido",
+    "RelativePath": "api/Pedido/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pedidoDTO",
+        "Type": "E_Commerce_API.DTO.CadastrarPedidoDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "E_Commerce_API.Controllers.ProdutoController",
     "Method": "ListarProdutos",
     "RelativePath": "api/Produto",

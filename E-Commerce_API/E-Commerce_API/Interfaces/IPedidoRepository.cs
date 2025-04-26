@@ -1,5 +1,6 @@
 ﻿using E_Commerce_API.DTO;
 using E_Commerce_API.Models;
+using E_Commerce_API.ViewModels;
 
 namespace E_Commerce_API.Interfaces
 {

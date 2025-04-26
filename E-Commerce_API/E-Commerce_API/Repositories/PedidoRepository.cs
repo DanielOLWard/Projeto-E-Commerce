@@ -2,6 +2,8 @@
 using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
+using E_Commerce_API.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce_API.Repositories
 {
@@ -20,7 +22,7 @@ namespace E_Commerce_API.Repositories
         {
             _context = context;
         }
-        public void Atualizar(int id, CadastrarPedidoDTO pedido)
+        public void Atualizar(int id, CadastrarPedidoDTO pedidoDTO)
         {
             // Encontro o pedido que desejo atualizar
             Pedido pedidoEncontrado = _context.Pedidos.Find(id);
@@ -28,21 +30,40 @@ namespace E_Commerce_API.Repositories
             // Tratamento de erro
             if (pedidoEncontrado == null)
             {
-                throw new Exception();
+                throw new ArgumentNullException();
             }
 
-            // Muda os dados um por um
-            pedidoEncontrado.DataPedido = pedidoEncontrado.DataPedido;
-            pedidoEncontrado.StatusPedido = pedidoEncontrado.StatusPedido;
-            pedidoEncontrado.ValorTotal = pedidoEncontrado.ValorTotal;
-            pedidoEncontrado.IdCliente = pedidoEncontrado.IdCliente;
+            // Crio a variavel pedido para guardar as informacoes do Peiddo
+            pedidoEncontrado = new Pedido
+            {
+                DataPedido = pedidoDTO.DataPedido,
+                StatusPedido = pedidoDTO.StatusPedido,
+                IdCliente = pedidoDTO.IdCliente,
+                ValorTotal = pedidoDTO.ValorTotal
+            };
+
+            _context.Pedidos.Add(pedidoEncontrado); // Salva o Pedido no Banco de Dados
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
-        }
 
-        public Pedido BuscarPorId(int id)
-        {
-            throw new NotImplementedException();
+            // Atualizo os ItensPedido
+            // para cada Produto, eu Crio um ItemPedido
+            for (int i = 0; i < pedidoDTO.Produtos.Count; i++)
+            {
+                var produtoEncontrado = _context.Produtos.Find(pedidoDTO.Produtos[i]); // Procuro o Produto atual
+                // TODO: Lancar erro se produto nao existe
+
+                // Crio uma variavel para guardar as informacoes do ItemPedido
+                var itemPedido = new ItemPedido
+                {
+                    IdPedido = pedidoEncontrado.IdPedido,
+                    IdProduto = produtoEncontrado.IdProduto,
+                    Quantidade = 0
+                };
+                _context.ItemPedidos.Add(itemPedido); // Salva o ItemPedido no Banco de Dados
+
+                _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
+            }
         }
 
         // Cadastrar Pedido
@@ -66,8 +87,12 @@ namespace E_Commerce_API.Repositories
             for (int i = 0; i < pedidoDTO.Produtos.Count; i++)
             {
                 var produto = _context.Produtos.Find(pedidoDTO.Produtos[i]); // Procuro o Produto atual
-                // TODO: Lancar erro se produto nao existe
-
+                /*
+                if (pedidoDTO != null)
+                {
+                    throw new ArgumentNullException();
+                }
+                */
                 // Crio uma variavel para guardar as informacoes do ItemPedido
                 var itemPedido = new ItemPedido
                 {
@@ -81,6 +106,11 @@ namespace E_Commerce_API.Repositories
             }
         }
 
+        public Pedido BuscarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Deletar(int id)
         {
             throw new NotImplementedException();
@@ -88,7 +118,10 @@ namespace E_Commerce_API.Repositories
 
         public List<Pedido> ListarTodos()
         {
-            return _context.Pedidos.ToList();
+            return _context.Pedidos
+                .Include(p => p.ItemPedidos)
+                .ThenInclude(p => p.IdProdutoNavigation)
+                .ToList();
         }
     }
 }

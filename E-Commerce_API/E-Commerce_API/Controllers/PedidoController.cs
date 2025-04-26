@@ -41,5 +41,20 @@ namespace E_Commerce_API.Controllers
             // 201 - Created <Criado>
             return Created();
         }
+
+        // Atualizar Pedido
+        [HttpPut("{id}")]
+        public IActionResult AtualizarPedido(int id, CadastrarPedidoDTO pedidoDTO)
+        {
+            try
+            {
+                _pedidoRepository.Atualizar(id, pedidoDTO);
+                return Ok(pedidoDTO);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return NotFound("Pedido nao encontrado!");
+            }
+        }
     }
 }
