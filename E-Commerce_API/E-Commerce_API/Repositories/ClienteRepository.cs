@@ -3,6 +3,7 @@ using E_Commerce_API.Context;
 using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
+using E_Commerce_API.Services;
 using E_Commerce_API.ViewModels;
 
 namespace E_Commerce_API.Repositories
@@ -27,6 +28,7 @@ namespace E_Commerce_API.Repositories
             // Encontro o cliente que desejo atualizar
             Cliente clienteEncontrado = _context.Clientes.Find(id);
 
+            var senhaService = new SenhaService();
             // Tratamento de erro
             if (clienteEncontrado == null)
             {
@@ -40,6 +42,8 @@ namespace E_Commerce_API.Repositories
             clienteEncontrado.Senha = clienteNovo.Senha;
             clienteEncontrado.Endereco = clienteNovo.Endereco;
             clienteEncontrado.DataCadatro = clienteNovo.DataCadatro;
+
+            clienteEncontrado.Senha = senhaService.HashPassword(clienteEncontrado);
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
@@ -73,6 +77,8 @@ namespace E_Commerce_API.Repositories
 
         public void Cadastrar(CadastrarClienteDTO dto)
         {
+            var senhaService = new SenhaService();
+
             Cliente clienteCdastrado = new Cliente
             {
                 NomeCompleto = dto.NomeCompleto,
@@ -80,8 +86,11 @@ namespace E_Commerce_API.Repositories
                 Senha = dto.Senha,
                 Telefone = dto.Telefone,
                 Endereco = dto.Endereco,
-                DataCadatro = dto.DataCadatro,
+                DataCadatro = dto.DataCadatro
             };
+
+            clienteCdastrado.Senha = senhaService.HashPassword(clienteCdastrado);
+
             _context.Clientes.Add(clienteCdastrado);
 
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
@@ -161,18 +170,20 @@ namespace E_Commerce_API.Repositories
         public List<ListarClienteViewModel> BuscarNomeParcial(string nomeParcial)
         {
             throw new NotImplementedException();
-            //    var buscarCliente = _context.Clientes
-            //        .Select(c => new ListarClienteViewModel // Seleciona apenas os dados do Cliente que constam na ViewModel
-            //        {
-            //            IdCliente = c.IdCliente,
-            //            NomeCompleto = c.NomeCompleto,
-            //            Email = c.Email,
-            //            Telefone = c.Telefone,
-            //            Endereco = c.Endereco
-            //        })
-            //        .Contains(c => c.NomeCompleto == nomeParcial)
-            //        .ToList();
-            //}
+            /*
+                var buscarCliente = _context.Clientes
+                    .Select(c => new ListarClienteViewModel // Seleciona apenas os dados do Cliente que constam na ViewModel
+                    {
+                        IdCliente = c.IdCliente,
+                        NomeCompleto = c.NomeCompleto,
+                        Email = c.Email,
+                        Telefone = c.Telefone,
+                        Endereco = c.Endereco
+                    })
+                    .Contains(c => c.NomeCompleto == nomeParcial)
+                    .ToList();
+            }
+            */
         }
     }
 }

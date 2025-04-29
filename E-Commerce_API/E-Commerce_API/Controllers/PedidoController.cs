@@ -3,6 +3,7 @@ using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
+using E_Commerce_API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,20 @@ namespace E_Commerce_API.Controllers
             {
                 return NotFound("Pedido nao encontrado!");
             }
+        }
+        // Buscar por Id
+        [HttpGet("{id}")]
+        public IActionResult ListarPorId(int id)
+        {
+            ListarPedidoViewModel pedido = _pedidoRepository.BuscarPorId(id);
+
+            if (pedido == null)
+            {
+                //erro404 - nao encontrado
+                return NotFound(); // Retorna 404 se não encontrar o cliente
+            }
+
+            return Ok(pedido); // Retorna 200 com os dados do cliente
         }
     }
 }

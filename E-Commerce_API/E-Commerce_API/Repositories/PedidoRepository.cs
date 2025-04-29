@@ -106,9 +106,19 @@ namespace E_Commerce_API.Repositories
             }
         }
 
-        public Pedido BuscarPorId(int id)
+        public ListarPedidoViewModel BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return _context.Pedidos
+                .Select(p => new ListarPedidoViewModel
+                {
+                    IdPedido = p.IdPedido,
+                    DataPedido = p.DataPedido,
+                    StatusPedido = p.StatusPedido,
+                    ValorTotal = p.ValorTotal,
+                    IdCliente = p.IdCliente,
+                    ItemPedidos = p.ItemPedidos
+                })
+                .FirstOrDefault(p => p.IdPedido == id);
         }
 
         public void Deletar(int id)

@@ -3,6 +3,7 @@ using E_Commerce_API.DTO;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
+using E_Commerce_API.Services;
 using E_Commerce_API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,9 @@ namespace E_Commerce_API.Controllers
     public class ClienteController : ControllerBase
     {
         private IClienteRepository _clienteRepository;
+
+        // Instanciar o SenhaService
+        private SenhaService senhaService = new SenhaService();
 
         // Injecao de dependencia
         // Ao invez de EU instanciar a classe, Eu aviso que DEPENDO dela, e a responsabilidade de criar vai para a classe que chama
@@ -53,7 +57,6 @@ namespace E_Commerce_API.Controllers
                 //erro404 - nao encontrado
                 return NotFound(); // Retorna 404 se não encontrar o cliente
             }
-
 
             return Ok(cliente); // Retorna 200 com os dados do cliente
         }

@@ -9,7 +9,7 @@ namespace E_Commerce_API.Interfaces
         // R - Read (leitura)
         List<Pedido> ListarTodos(); //Recebe um identificador, e retorna o pedido correspondente
 
-        Pedido BuscarPorId(int id);
+        ListarPedidoViewModel BuscarPorId(int id);
 
         // C - Create (Cadastrar)
         void Cadastrar(CadastrarPedidoDTO pedido);
