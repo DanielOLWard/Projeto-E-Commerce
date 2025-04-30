@@ -123,7 +123,20 @@ namespace E_Commerce_API.Repositories
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            // 1 - encontrar o pedido que eu quero excluir
+            Pedido pedidoEncontrado = _context.Pedidos.Find(id); // Find - Procura apenas pela chave primaria
+
+            // Tratamento de erro
+            if (pedidoEncontrado == null)
+            {
+                throw new Exception();
+            }
+
+            // 2 - Caso eu enconte o pedido, removo ele
+            _context.Pedidos.Remove(pedidoEncontrado);
+
+            // 3 - Salvo as alteracoes
+            _context.SaveChanges();
         }
 
         public List<Pedido> ListarTodos()

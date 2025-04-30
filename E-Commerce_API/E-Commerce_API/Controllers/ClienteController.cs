@@ -5,6 +5,7 @@ using E_Commerce_API.Models;
 using E_Commerce_API.Repositories;
 using E_Commerce_API.Services;
 using E_Commerce_API.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,7 @@ namespace E_Commerce_API.Controllers
 
         // Get - Listar uma ou mais informacoes para o front 
         [HttpGet]
+        [Authorize] // Autoriza apenas pessoas autorizadas
         public IActionResult ListarClientes()
         {
             // 200 - ok <Deu certo>
@@ -93,19 +95,26 @@ namespace E_Commerce_API.Controllers
         }
 
         // Buscar Cliente por Email e Senha
-        // /api/cliente/daniel@gmail.com/12345
-        [HttpGet("{email}/{senha}")]
-        public IActionResult Login(string email, string senha)
+        // /api/login
+        [HttpPost("login")]
+        public IActionResult Login(LoginDTO login)
         {
-            var cliente = _clienteRepository.BuscarPorEmailSenha(email, senha);
+            var cliente = _clienteRepository.BuscarPorEmailSenha(login.Email, login.Senha);
             if (cliente == null)
-            { return NotFound(); }
-            return Ok(cliente);
+            { 
+                return Unauthorized("Email ou Senha invalido!");
+            }
+            var tokenService = new TokenService();
+
+            var token = tokenService.GerarToken(cliente.Email);
+
+            return Ok(token);
         }
+
         // Buscar Cliente por Nome
         // /api/cliente/buscar/nome
         // O navegador nao entende quando tem 2 endpoints "enguais" entao e necessario criar um novo endpoint
-        [HttpGet("/buscar/{nome}")]
+        [HttpGet("buscar/{nome}")]
         public IActionResult BuscarPorNome(string nome)
         {
             return Ok(_clienteRepository.BuscarPorNome(nome));

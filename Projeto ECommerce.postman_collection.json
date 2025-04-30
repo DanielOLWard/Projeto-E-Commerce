@@ -248,6 +248,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJzdHJpbmdAdGVzdGUiLCJleHAiOjE3NDU5NzQzNDksImlzcyI6ImVjb21tZXJjZSIsImF1ZCI6ImVjb21tZXJjZSJ9.lsYWRkylJ8lD9B7cVNyzgZ5PUlK9LXhFLs27xv0yoFA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -379,12 +389,21 @@
 					"response": []
 				},
 				{
-					"name": "Buscar por email e senha",
+					"name": "Login",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"string@teste\",\r\n  \"senha\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://localhost:7244/api/cliente/fulano@gmail.com/123456",
+							"raw": "https://localhost:7244/api/cliente/login",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -393,8 +412,7 @@
 							"path": [
 								"api",
 								"cliente",
-								"fulano@gmail.com",
-								"123456"
+								"login"
 							]
 						}
 					},
@@ -567,6 +585,72 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Listar Pedido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7244/api/Pedido",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"dataPedido\": \"2025-04-30\",\r\n        \"statusPedido\": \"bla\",\r\n        \"valorTotal\": 50.50,\r\n        \"idCliente\": 2,\r\n        \"Produtos\": [2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7244/api/Pedido",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7244",
+							"path": [
+								"api",
+								"Pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagamento",
+			"item": []
 		}
 	]
 }

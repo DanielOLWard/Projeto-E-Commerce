@@ -23,10 +23,12 @@
 
 // Se ultiliza o Swaggers no http usando o sSwagger na URL */
 
+using System.Text;
 using E_Commerce_API.Context;
 using E_Commerce_API.Controllers;
 using E_Commerce_API.Interfaces;
 using E_Commerce_API.Repositories;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args); // Nao mexer e sempre deixar ela no comeco (com excessao dos "using")
 
@@ -51,6 +53,25 @@ builder.Services.AddTransient<IPagamentoRepository, PagamentoRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddTransient<IItemPedidoRepository, ItemPedidoRepository>();
 
+// Valida os tokens
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true, // o C# vai verificar se os dados batem
+            ValidateAudience = true, // o C# vai verificar se os dados batem
+            ValidateLifetime = true, // o C# vai verificar se os dados batem
+            ValidateIssuerSigningKey = true, // o C# vai verificar se os dados batem
+            ValidIssuer = "ecommerce", // Tem que ser igual as Issuer e Audience do TokenService
+            ValidAudience = "ecommerce",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("minha-chave-ultra-mega-secreta-de-seguranca-do-senai")) // Usa a mesma linha que cria a chave no TokenService
+        };
+    });
+
+// Cria as autorizacoes do usuarios, limitando as EndPoins dos usuarios
+builder.Services.AddAuthorization();
+
 var app = builder.Build(); // O C# controi o "site" NAO MEXER, Colocar os codigos entre ele e o "var builder"
 
 app.UseSwagger();
@@ -58,5 +79,9 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
+
+app.UseAuthentication(); // usa autenticacao
+
+app.UseAuthorization(); // Usa a autorizacao
 
 app.Run(); // sempre sera a ultima linha de codigo, pois codigos depois dela nao ira funcionar

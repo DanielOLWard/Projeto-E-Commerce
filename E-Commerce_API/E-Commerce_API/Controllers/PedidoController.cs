@@ -71,5 +71,21 @@ namespace E_Commerce_API.Controllers
 
             return Ok(pedido); // Retorna 200 com os dados do cliente
         }
+
+        // Deleta Peiddo por ID
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            // Usando o try/catch pois o repositoy lancou um erro (sempre usar o try/catch para tratar com erros
+            try
+            {
+                _pedidoRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return NotFound("Produto nao encontrado!");
+            }
+        }
     }
 }

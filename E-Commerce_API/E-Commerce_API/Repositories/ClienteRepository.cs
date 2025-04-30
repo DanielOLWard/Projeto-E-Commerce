@@ -48,16 +48,23 @@ namespace E_Commerce_API.Repositories
             _context.SaveChanges(); // Sempre colocar o SaveChanges quando for mudar algo no Banco de Dados
         }
 
-        /// <summary>
-        /// Acessa o banco de dados, e encontra o Cliente com Email e Senha Fornecidos
-        /// </summary>
-        /// <returns>Um cliente ou nulo</returns>
+        // Busca o Cliente por email e senha (Login)
         public Cliente BuscarPorEmailSenha(string email, string senha)
         {
-            // Encontrar o Cliente que possui o email e senha fornecidos
-            var clienteEncontrado = _context.Clientes.FirstOrDefault(c => c.Email == email && c.Senha == senha);
+            // Encontrar o Cliente que possui o email fornecido
+            var clienteEncontrado = _context.Clientes.FirstOrDefault(c => c.Email == email);
 
-            return clienteEncontrado;
+            // Caso nao encontre retorno null
+            if (clienteEncontrado == null) {return null;}
+
+            var passwordService = new SenhaService();
+
+            // Verificar se a senha dada pelo usuario gera o mesmo hash
+            var resultado = passwordService.VerificarSenha(clienteEncontrado, senha);
+
+            if (resultado== true) {return clienteEncontrado;}
+
+            return null;
         }
 
         public ListarClienteViewModel BuscarPorId(int id)
